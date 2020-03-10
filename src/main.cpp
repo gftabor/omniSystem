@@ -2,80 +2,119 @@
 #include "std_msgs/String.h"
 
 #include <sstream>
+#include <vector>
+#include "OmniMagnetProjectCameraTracking/omnimagnet.hpp"
+#include "OmniMagnetProjectCameraTracking/cameratrack.hpp"
+#include <iostream>
+#include <fstream>
 
-/**
- * This tutorial demonstrates simple sending of messages over the ROS system.
- */
+using namespace Spinnaker;
+using namespace Spinnaker::GenApi;
+using namespace Spinnaker::GenICam;
+
+
 int main(int argc, char **argv)
 {
-  /**
-   * The ros::init() function needs to see argc and argv so that it can perform
-   * any ROS arguments and name remapping that were provided at the command line.
-   * For programmatic remappings you can use a different version of init() which takes
-   * remappings directly, but for most command-line programs, passing argc and argv is
-   * the easiest way to do it.  The third argument to init() is the name of the node.
-   *
-   * You must call one of the versions of ros::init() before using any other
-   * part of the ROS system.
-   */
-  ros::init(argc, argv, "talker");
 
-  /**
-   * NodeHandle is the main access point to communications with the ROS system.
-   * The first NodeHandle constructed will fully initialize this node, and the last
-   * NodeHandle destructed will close down the node.
-   */
+  ros::init(argc, argv, "talker");
   ros::NodeHandle n;
 
-  /**
-   * The advertise() function is how you tell ROS that you want to
-   * publish on a given topic name. This invokes a call to the ROS
-   * master node, which keeps a registry of who is publishing and who
-   * is subscribing. After this advertise() call is made, the master
-   * node will notify anyone who is trying to subscribe to this topic name,
-   * and they will in turn negotiate a peer-to-peer connection with this
-   * node.  advertise() returns a Publisher object which allows you to
-   * publish messages on that topic through a call to publish().  Once
-   * all copies of the returned Publisher object are destroyed, the topic
-   * will be automatically unadvertised.
-   *
-   * The second parameter to advertise() is the size of the message queue
-   * used for publishing messages.  If messages are published more quickly
-   * than we can send them, the number here specifies how many messages to
-   * buffer up before throwing some away.
-   */
+
+
+
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Setup for the D2A card for Omni system: --- DON'T MODIFIY ---
+
+    //opening the D2A card:
+    int subdev = 0;     /* change this to your input subdevice */
+    int chan = 10;      /* change this to your channel */
+    int range = 16383;      /* more on this later */
+    int aref = AREF_GROUND; /* more on this later */
+    unsigned int subdevice = 0;
+    int res;
+    comedi_t *D2A;
+    D2A = comedi_open("/dev/comedi0");
+        if(D2A == NULL) {
+        printf("did not work");
+        comedi_perror("comedi_open");
+        return 1;
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Activating the amplifiers inhibits. Pins are 25&26   --- DON'T MODIFIY ---
+    int retval;
+    retval = comedi_data_write(D2A, subdev, 25, 0, AREF_GROUND, 16383.0*3/4);
+    retval = comedi_data_write(D2A, subdev, 26, 0, AREF_GROUND, 16383.0*3/4);
+    int rrr;
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Setup for the Cameras: --- DON'T MODIFIY ---
+    SystemPtr system = System::GetInstance();
+    
+    // Retrieve list of cameras from the system
+    std::cout << "\nGetting Camera(s)\n";
+
+    CameraList camList = system->GetCameras();
+    const unsigned int numCameras = camList.GetSize();
+    std::cout << "Number of cameras detected: " << numCameras << std::endl;
+    if (numCameras == 0)
+    {
+        // Clear camera list before releasing system
+        camList.Clear();
+        // Release system
+        system->ReleaseInstance();
+        std::cout << "Not enough cameras!" << std::endl;
+        std::cout << "Done! Press Enter to exit..." << std::endl;
+        getchar();
+        return -1;
+    }
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////
+    // Defining the cameras
+    std::cout << "Setup target tracking";
+    Eigen::Vector3d targetPose;
+
+    CameraTracker camTrack1(camList.GetByIndex(0), targetPose, 1, 30.0, "/home/ashkan/catkin_ws/src/omniSystem/src/camera_calibration.xml"); //Defines a tracker with a given camera * and 3 IDs for coordinate frame and an ID for the target and address to the calibration file,  
+    cv::Mat Image = camTrack1.GetCurrentFrame();
+    for (int i = 0; i<30; i++){
+      camTrack1.UpdateTargetPose();
+      // std::chrono::seconds dura( 1);
+      // std::this_thread::sleep_for( dura );
+    }
+
+    // Test/Example Camera function
+    bool target_marker = true;     //Show target marker
+    bool origin_markers = false;   //Show orgin outlines 
+    camTrack1.SaveCurrentFrame("frame.jpg",target_marker,origin_markers);
+    std::cout << "\nTarget Position:\n" << camTrack1.GetTargetLocation() << "\n"; // print target location 
+    std::cout << "\nTarget Orientation:\n" << camTrack1.GetTargetOrientaion() << "\n"; // print target location 
+
+
+
+
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(1);
 
-  /**
-   * A count of how many messages we have sent. This is used to create
-   * a unique string for each message.
-   */
   int count = 0;
   while (ros::ok())
   {
-    /**
-     * This is a message object. You stuff it with data, and then publish it.
-     */
-    std_msgs::String msg;
+    std::cout << "\nTarget Position:\n" << camTrack1.GetTargetLocation() << "\n"; // print target location 
+    std::cout << "\nTarget Orientation:\n" << camTrack1.GetTargetOrientaion() << "\n"; // print target location 
 
+
+
+    std_msgs::String msg;
     std::stringstream ss;
     ss << "hello world " << count;
+
     msg.data = ss.str();
-
-    ROS_INFO("%s", msg.data.c_str());
-
-    /**
-     * The publish() function is how you send messages. The parameter
-     * is the message object. The type of this object must agree with the type
-     * given as a template parameter to the advertise<>() call, as was done
-     * in the constructor above.
-     */
+    //ROS_INFO("%s", msg.data.c_str());
     chatter_pub.publish(msg);
-
     ros::spinOnce();
-
     loop_rate.sleep();
     ++count;
   }
