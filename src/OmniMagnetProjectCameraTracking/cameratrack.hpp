@@ -32,6 +32,15 @@ using namespace Spinnaker::GenApi;
 using namespace Spinnaker::GenICam;
 using namespace Eigen;
 
+
+
+enum triggerType
+{
+    SOFTWARE,
+    HARDWARE
+};
+const triggerType chosenTrigger = SOFTWARE;
+
 class CameraTracker {
 	private:
 		CameraPtr pCam = nullptr;     /* pointer to the camera */
@@ -52,8 +61,13 @@ class CameraTracker {
         std::vector<cv::Vec3d> rvecs, tvecs; 
         cv::Vec3d rvec;
 	    cv::Vec3d tvec;
+	    // INodeMap& nodeMap;
 		void ReadCalirbation(std::string fileName);
-		int Initial();		
+		int Initial();	
+		int GrabNextImageByTrigger(INodeMap& nodeMap, CameraPtr pCam);
+		int ResetTrigger(INodeMap& nodeMap);
+		int ConfigureTrigger(INodeMap& nodeMap);
+
 	public:
 		CameraTracker();
 		~CameraTracker();
@@ -68,6 +82,6 @@ class CameraTracker {
 		cv::Mat GetCurrentFrame();	//Returns the current frame from the camera (Type : opencv Mat)
 		int PrintDeviceInfo(INodeMap& nodeMap);	//Prints the device (use it to be sure the camera is detected.)
 		void UpdateFrame(); //Updates the frame
-
+		int TempUpdateFrame();
 };
 #endif // CAMTR_H

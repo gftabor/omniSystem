@@ -131,7 +131,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/main.cpp 
+add_executable(camera_node src/camera_node.cpp 
 	src/OmniMagnetProjectCameraTracking/cameratrack.cpp
 	src/OmniMagnetProjectCameraTracking/type.cpp
 	src/OmniMagnetProjectCameraTracking/omnimagnet.cpp)
@@ -147,7 +147,7 @@ add_executable(${PROJECT_NAME}_node src/main.cpp
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(${PROJECT_NAME}_node PRIVATE
+ target_link_libraries(camera_node PRIVATE
    ${catkin_LIBRARIES}
    "/usr/lib/libSpinnaker.so" ${OpenCV_LIBS}
    "/usr/local/lib/libcomedi.a"
