@@ -3,7 +3,6 @@
 
 #include <sstream>
 #include <vector>
-#include "OmniMagnetProjectCameraTracking/omnimagnet.hpp"
 #include "OmniMagnetProjectCameraTracking/cameratrack.hpp"
 #include <iostream>
 #include <fstream>
@@ -71,9 +70,9 @@ int main(int argc, char **argv)
   while (ros::ok())
   {
     geometry_msgs::PoseStamped msg;
+    camTrack1.UpdateTargetPose();
     msg.header.stamp = ros::Time::now();
     msg.header.frame_id = "world";
-    camTrack1.UpdateTargetPose();
     Eigen::Vector3d p = camTrack1.GetTargetLocation() ;
     Eigen::Vector3d o = camTrack1.GetTargetOrientaion() ;
     msg.pose.position.x = p[0] / 1000.0;
