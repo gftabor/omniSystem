@@ -1,0 +1,13 @@
+<launch>
+  <machine
+     name="omni"
+     default="never"
+     address="192.168.1.2" user="ashkan"
+     password="Ashipouri"
+     env-loader="/home/ashkan/catkin_ws/src/omniSystem/launch/omniMachine.env"
+  />
+
+  <node type="omni_node" name="omni_node" pkg="omniSystem" machine="omni" output="screen" />
+  <node type="camera_node" name="camera_node" pkg="omniSystem" machine="omni" output="screen" respawn="true"/>
+
+</launch>
