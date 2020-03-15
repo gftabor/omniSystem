@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 
   ros::init(argc, argv, "tracker");
   ros::NodeHandle n;
+  ROS_INFO( "Started tracker" );
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Setup for the Cameras: --- DON'T MODIFIY ---
@@ -27,21 +28,22 @@ int main(int argc, char **argv)
 
     CameraList camList = system->GetCameras();
     const unsigned int numCameras = camList.GetSize();
-    std::cout << "Number of cameras detected: " << numCameras << std::endl;
+    ROS_INFO( "Number of cameras detected: %d", numCameras );
+
     if (numCameras == 0)
     {
         // Clear camera list before releasing system
         camList.Clear();
         // Release system
         system->ReleaseInstance();
-        std::cout << "Not enough cameras!" << std::endl;
-        std::cout << "Done! Press Enter to exit..." << std::endl;
-        getchar();
+        ROS_ERROR( "Not enough cameras!");
+
         return -1;
     }
 
 
 
+    ROS_INFO( "Setup target tracking");
 
     /////////////////////////////////////////////////////////////////////////////////
     // Defining the cameras
