@@ -74,7 +74,7 @@ int main(int argc, char **argv)
     geometry_msgs::PoseStamped msg;
     camTrack1.UpdateTargetPose();
     msg.header.stamp = ros::Time::now();
-    msg.header.frame_id = "world";
+    msg.header.frame_id = "camera";
     Eigen::Vector3d p = camTrack1.GetTargetLocation() ;
     Eigen::Vector3d o = camTrack1.GetTargetOrientaion() ;
     msg.pose.position.x = p[0] / 1000.0;

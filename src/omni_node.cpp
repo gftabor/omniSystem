@@ -19,8 +19,11 @@ Eigen::Vector3d rotation_axis;      // rotation axis
 void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
 {
   int magnet = msg->magnetNumber;
-  dipole_axis << msg->dipoleAxis[0],msg->dipoleAxis[1], msg->dipoleAxis[2];
-  rotation_axis << msg->rotationAxis[0],msg->rotationAxis[1], msg->rotationAxis[2];
+  dipole_axis << msg->dipoleAxis.vector.x,msg->dipoleAxis.vector.y, msg->dipoleAxis.vector.z;
+  rotation_axis << msg->rotationAxis.vector.x,msg->rotationAxis.vector.y, msg->rotationAxis.vector.z;
+  std::cout << "d axis " << dipole_axis << std::endl;
+  std::cout << "r axis " << rotation_axis << std::endl;
+
   float dipole_strength = msg->strength;
   float run_time = msg-> runTime;
   float freq = msg->frequency;
