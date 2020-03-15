@@ -1,12 +1,21 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
+#include "omniSystem/OmniRotationCommand.h"
+
+int currentMag = -1;
+
+void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
+{
+  currentMag = msg->magnetNumber;
+}
 
 int main( int argc, char** argv )
 {
   ros::init(argc, argv, "basic_shapes");
   ros::NodeHandle n;
-  ros::Rate r(1);
+  ros::Rate r(10);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+  ros::Subscriber omni1Sub = n.subscribe("omniMagnet", 1000, magCommandCallback);
 
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::CUBE;
@@ -75,12 +84,17 @@ int main( int argc, char** argv )
         marker.color.g = 0.0f;
         marker.color.b = 1.0f;
       }
+      if(i ==currentMag){
+        marker.color.a = 1.00;
+
+      }
       marker.lifetime = ros::Duration();
 
       marker_pub.publish(marker);
     }
 
     r.sleep();
+    ros::spinOnce();
   }
 }
 
