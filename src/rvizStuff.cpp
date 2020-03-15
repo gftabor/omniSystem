@@ -29,7 +29,6 @@ int main( int argc, char** argv )
       {
       case 0:
         marker.header.frame_id = "/omni0";
-        ROS_INFO("mag 1");
         break;
       case 1:
         marker.header.frame_id = "/omni1";
@@ -86,6 +85,7 @@ int main( int argc, char** argv )
       }
       if(i ==currentMag){
         marker.color.a = 1.00;
+        ROS_INFO("mag %d",i);
 
       }
       marker.lifetime = ros::Duration();
