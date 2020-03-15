@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /Pose1
-        - /WrenchStamped1
       Splitter Ratio: 0.5
     Tree Height: 775
   - Class: rviz/Selection
@@ -38,7 +37,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 160; 160; 164
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.0299999993
         Value: Lines
@@ -51,7 +50,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Class: rviz/TF
       Enabled: false
       Frame Timeout: 15
@@ -102,6 +101,19 @@ Visualization Manager:
       Torque Color: 204; 204; 51
       Unreliable: false
       Value: true
+    - Alpha: 1
+      Arrow Width: 0.100000001
+      Class: rviz/WrenchStamped
+      Enabled: true
+      Force Arrow Scale: 0.200000003
+      Force Color: 204; 51; 51
+      History Length: 1
+      Name: WrenchStamped
+      Topic: /desiredSWrench
+      Torque Arrow Scale: 2
+      Torque Color: 204; 204; 51
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -127,25 +139,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.41686845
+      Distance: 1.09129465
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.0166248884
-        Y: 0.138768882
-        Z: 0.0272130407
+        X: 0.00680392468
+        Y: -0.0337807201
+        Z: -0.342584968
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.14479494
+      Pitch: 1.07479537
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.61857462
+      Yaw: 4.70357847
     Saved: ~
 Window Geometry:
   Displays:

@@ -1,6 +1,8 @@
 <launch>
    
-  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.42 0 3.14 0 center world 100" />
+  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.42 0 0 0 camera center 100" />
+  
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 3.14 0 world camera 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.165 0.120 -0.145 0 -3.14 0 center omni0 100" />
 
