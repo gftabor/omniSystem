@@ -1,18 +1,18 @@
 <launch>
    
-  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.42 0 0 0 camera center 100" />
+  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.42 0 0 0 camera center 10" />
   
-  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 3.14 0 world camera 100" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 3.14 0 world camera 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.165 0.120 -0.145 0 -3.14 0 center omni0 100" />
+  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.165 0.120 -0.11 0 -3.14 0 center omni0 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.120 0.430 0 -1.57 -3.14 0 center omni1 100" />
+  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.120 0.430 0 -1.57 -3.14 0 center omni1 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.220 0.120 -0.145 0 -3.14 0 center omni2 100" />
+  <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.220 0.120 -0.11 0 -3.14 0 center omni2 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.220 -0.120 -0.145 0 -3.14 0 center omni3 100" />
+  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.220 -0.120 -0.11 0 -3.14 0 center omni3 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.165 -0.120 -0.145 -1.57 -3.14 0 center omni4 100" />
+  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.165 -0.120 -0.11 -1.57 -3.14 0 center omni4 10" />
 
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find omniSystem)/rviz/config_file.rviz" />
   <node type="rvizStuff" name="rvizStuff" pkg="omniSystem" />

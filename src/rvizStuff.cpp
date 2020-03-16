@@ -3,10 +3,42 @@
 #include "omniSystem/OmniRotationCommand.h"
 
 int currentMag = -1;
-
+ros::Publisher marker_pub;
 void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
 {
   currentMag = msg->magnetNumber;
+  visualization_msgs::Marker line_strip;
+  line_strip.header.stamp =  msg->header.stamp;
+  line_strip.header.frame_id =  msg->rotationAxis.header.frame_id;
+
+  
+  line_strip.ns ="points_and_lines";
+  line_strip.action = visualization_msgs::Marker::ADD;
+  line_strip.type = visualization_msgs::Marker::LINE_STRIP;
+
+
+  line_strip.pose.orientation.w =  1.0;
+  line_strip.id = 10;
+
+  line_strip.scale.x = 0.1;
+  // Line strip is blue
+  line_strip.color.b = 1.0;
+  line_strip.color.a = 1.0;
+
+
+  geometry_msgs::Point p;
+  p.x = 0;
+  p.y = 0;
+  p.z = 0;
+  line_strip.points.push_back(p);
+
+
+  geometry_msgs::Point p2;
+  p2.x = msg->rotationAxis.vector.x;
+  p2.y = msg->rotationAxis.vector.y;
+  p2.z = msg->rotationAxis.vector.z;
+  line_strip.points.push_back(p2);
+  marker_pub.publish(line_strip);
 }
 
 int main( int argc, char** argv )
@@ -14,7 +46,8 @@ int main( int argc, char** argv )
   ros::init(argc, argv, "basic_shapes");
   ros::NodeHandle n;
   ros::Rate r(10);
-  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+  marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+
   ros::Subscriber omni1Sub = n.subscribe("omniMagnet", 1000, magCommandCallback);
 
   // Set our initial shape type to be a cube
@@ -84,7 +117,7 @@ int main( int argc, char** argv )
         marker.color.b = 1.0f;
       }
       if(i ==currentMag){
-        marker.color.a = 1.00;
+        marker.color.a = 0.60;
         ROS_INFO("mag %d",i);
 
       }
