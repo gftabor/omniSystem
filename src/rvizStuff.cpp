@@ -50,41 +50,20 @@ int main( int argc, char** argv )
 
   ros::Subscriber omni1Sub = n.subscribe("omniMagnet", 1000, magCommandCallback);
 
-  // Set our initial shape type to be a cube
-  uint32_t shape = visualization_msgs::Marker::CUBE;
 
   while (ros::ok())
   {
-    for(int i =0;i<6;i++){
+    for(int i =0;i<7;i++){
       visualization_msgs::Marker marker;
       // Set the frame ID and timestamp.  See the TF tutorials for information on these.
-      switch (i)
-      {
-      case 0:
-        marker.header.frame_id = "/omni0";
-        break;
-      case 1:
-        marker.header.frame_id = "/omni1";
-        break;
-      case 2:
-        marker.header.frame_id = "/omni2";
-        break;
-      case 3:
-        marker.header.frame_id = "/omni3";
-        break;
-      case 4:
-        marker.header.frame_id = "/omni4";
-        break;
-      case 5:
-        marker.header.frame_id = "/center";
-        break;
-      } 
+
+
       marker.header.stamp = ros::Time::now();
       marker.ns = "omniSystem";
       marker.id = i;
       ROS_INFO("frame is %d",i);
       // Set the marker type.  Initially this is CUBE, and cycles between that and SPHERE, ARROW, and CYLINDER
-      marker.type = shape;
+      marker.type =  visualization_msgs::Marker::CUBE;;
 
       // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
       marker.action = visualization_msgs::Marker::ADD;
@@ -108,18 +87,49 @@ int main( int argc, char** argv )
       marker.color.g = 0.0f;
       marker.color.b = 0.0f;
       marker.color.a = 0.20;
-      if(i == 5){
+
+      switch (i)
+      {
+      case 0:
+        marker.header.frame_id = "/omni0";
+        break;
+      case 1:
+        marker.header.frame_id = "/omni1";
+        break;
+      case 2:
+        marker.header.frame_id = "/omni2";
+        break;
+      case 3:
+        marker.header.frame_id = "/omni3";
+        break;
+      case 4:
+        marker.header.frame_id = "/omni4";
+        break;
+      case 5:
+        marker.header.frame_id = "/center";
         marker.scale.x = 0.62;
         marker.scale.y = 0.38;
         marker.scale.z = 0.125;
         marker.color.r = 0.0f;
         marker.color.g = 0.0f;
         marker.color.b = 1.0f;
-      }
+        break;
+      case 6:
+        marker.header.frame_id = "/object";
+        marker.type =  visualization_msgs::Marker::SPHERE;
+        marker.color.r = 0.722f;
+        marker.color.g = 0.451f;
+        marker.color.b = 0.20f;
+        marker.scale.x = 0.05;
+        marker.scale.y = 0.05;
+        marker.scale.z = 0.05;
+        marker.color.a = 0.80;
+
+        break;
+      } 
       if(i ==currentMag){
         marker.color.a = 0.60;
         ROS_INFO("mag %d",i);
-
       }
       marker.lifetime = ros::Duration();
 
