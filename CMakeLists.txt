@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(omniSystem)
+add_compile_options(-std=c++11)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -7,7 +8,8 @@ project(omniSystem)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp tf rospy std_msgs geometry_msgs genmsg message_generation)
+find_package(catkin REQUIRED COMPONENTS roscpp tf rospy std_msgs geometry_msgs genmsg message_generation
+	cv_bridge image_geometry tf2 tf2_ros)
 find_package(OpenCV REQUIRED )
 
 ## System dependencies are found with CMake's conventions
@@ -102,7 +104,7 @@ find_package(OpenCV REQUIRED )
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES omniSystem
-   CATKIN_DEPENDS message_runtime
+   CATKIN_DEPENDS message_runtime cv_bridge image_geometry geometry_msgs roscpp rospy std_msgs tf2 tf2_ros
 #  DEPENDS system_lib
 )
 
@@ -131,32 +133,36 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(camera_node src/camera_node.cpp 
-	src/OmniMagnetProjectCameraTracking/cameratrack.cpp)
-add_executable(omni_node src/omni_node.cpp 
-	src/OmniMagnetProjectCameraTracking/type.cpp
-	src/OmniMagnetProjectCameraTracking/omnimagnet.cpp)
+#add_executable(camera_node src/camera_node.cpp 
+#	src/OmniMagnetProjectCameraTracking/cameratrack.cpp)
+#add_executable(omni_node src/omni_node.cpp 
+#	src/OmniMagnetProjectCameraTracking/type.cpp
+#	src/OmniMagnetProjectCameraTracking/omnimagnet.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
 add_executable(rvizStuff src/rvizStuff.cpp)
+add_executable(simple_aruco_detector_node src/simple_aruco_detector_node.cpp)
 target_link_libraries(rvizStuff ${catkin_LIBRARIES})
+target_link_libraries(simple_aruco_detector_node
+        ${catkin_LIBRARIES}
+        )
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(camera_node PRIVATE
-   ${catkin_LIBRARIES}
-   "/usr/lib/libSpinnaker.so" ${OpenCV_LIBS}
-)
-  target_link_libraries(omni_node PRIVATE
-   ${catkin_LIBRARIES}
-   "/usr/lib/libSpinnaker.so" ${OpenCV_LIBS}
-   "/usr/local/lib/libcomedi.a"
-)
+# target_link_libraries(camera_node PRIVATE
+#   ${catkin_LIBRARIES}
+#   "/usr/lib/libSpinnaker.so" ${OpenCV_LIBS}
+#)
+#  target_link_libraries(omni_node PRIVATE
+#   ${catkin_LIBRARIES}
+#   "/usr/lib/libSpinnaker.so" ${OpenCV_LIBS}
+#   "/usr/local/lib/libcomedi.a"
+#)
 
 #############
 ## Install ##

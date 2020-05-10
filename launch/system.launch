@@ -14,8 +14,12 @@
 
   <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.165 -0.120 -0.11 -1.57 -3.14 0 center omni4 10" />
 
+  <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 0 marker_id18 object 10" />
+
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find omniSystem)/rviz/config_file.rviz" />
   <node type="rvizStuff" name="rvizStuff" pkg="omniSystem" />
-  <include file="$(find omniSystem)/launch/hardware.launch" />
+  <!--<include file="$(find omniSystem)/launch/hardware.launch" />-->
+  <include file="$(find omniSystem)/launch/camera.launch" />
+
 
 </launch>
