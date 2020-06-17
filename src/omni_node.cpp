@@ -21,17 +21,26 @@ void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
   int magnet = msg->magnetNumber;
   dipole_axis << msg->dipoleAxis.vector.x,msg->dipoleAxis.vector.y, msg->dipoleAxis.vector.z;
   rotation_axis << msg->rotationAxis.vector.x,msg->rotationAxis.vector.y, msg->rotationAxis.vector.z;
+  float timeError = (ros::Time::now()-msg->header.stamp).toSec();
+  ROS_INFO("time is off by %f",timeError);
+  if(timeError > 0.05){
+    ROS_ERROR("TIME IS OFF by %f",timeError);
+  }
+
   std::cout << "d axis " << dipole_axis << std::endl;
   std::cout << "r axis " << rotation_axis << std::endl;
 
   float dipole_strength = msg->strength;
-  float run_time = msg-> runTime;
+  float run_time = msg-> runTime - int(1000*timeError);
   float freq = msg->frequency;
-  ROS_INFO("commanding magnet %d with power of %f",magnet,dipole_strength);
+  ROS_INFO("commanding magnet %d with power of %f for %f",magnet,dipole_strength,run_time);
   omni_system[magnet].RotatingDipole(dipole_strength*dipole_axis, rotation_axis, freq, run_time); // rotates the dipole aling the given axis, with the given frequency for a given duration. (dipole, axis, frequency(Hz), duration(ms))
   Eigen::Vector3d OFFCommand;
   OFFCommand << 0,0,0;
+  ROS_INFO("commanding magnet %d back off",magnet);
+
   omni_system[magnet].SetCurrent(OFFCommand); 
+
 }
 int main(int argc, char **argv)
 {
@@ -73,6 +82,8 @@ int main(int argc, char **argv)
   ros::NodeHandle n;
   ros::Rate loop_rate(100);
   ros::Subscriber omni1Sub = n.subscribe("omniMagnet", 1000, magCommandCallback);
+  ROS_INFO("Omni node ready for commands");
+  ROS_ERROR("Omni node error ready for commands");
 
 
   while (ros::ok())

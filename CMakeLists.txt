@@ -144,11 +144,8 @@ include_directories(
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
 add_executable(rvizStuff src/rvizStuff.cpp)
-add_executable(simple_aruco_detector_node src/simple_aruco_detector_node.cpp)
 target_link_libraries(rvizStuff ${catkin_LIBRARIES})
-target_link_libraries(simple_aruco_detector_node
-        ${catkin_LIBRARIES}
-        )
+
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
