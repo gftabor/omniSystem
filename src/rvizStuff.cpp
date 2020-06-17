@@ -61,7 +61,7 @@ int main( int argc, char** argv )
       marker.header.stamp = ros::Time::now();
       marker.ns = "omniSystem";
       marker.id = i;
-      ROS_INFO("frame is %d",i);
+      //ROS_INFO("frame is %d",i);
       // Set the marker type.  Initially this is CUBE, and cycles between that and SPHERE, ARROW, and CYLINDER
       marker.type =  visualization_msgs::Marker::CUBE;;
 
@@ -129,7 +129,7 @@ int main( int argc, char** argv )
       } 
       if(i ==currentMag){
         marker.color.a = 0.60;
-        ROS_INFO("mag %d",i);
+        //ROS_INFO("mag %d",i);
       }
       marker.lifetime = ros::Duration();
 
