@@ -42,7 +42,8 @@ void OmniMagnet::UpdateMapping() /* Generates the mapping (3X3) matrix*/
 
 		// Generates mapping of dipole (Am^2) to current density (A/m^2)
 		// Equation (13) from Omnimagnet Paper
-		mapping_ = Eigen::MatrixXd::Identity(3,3)*((51.45 * pow (10.0, -3.0) * pow(0.115,4)));
+		float mapping_constant = 51.45 *2 * 0.825; 	// Tuned value to map current to desired dipole strength 
+		mapping_ = Eigen::MatrixXd::Identity(3,3)*((mapping_constant * pow (10.0, -3.0) * pow(0.115,4)));
 		// mapping_ = Eigen::MatrixXd::Identity(3,3)*((51.45 * pow (10.0, -3.0) * (0.115))/(wire_width*wire_width));
 		axis_rot_Z = (Eigen::AngleAxisd(orientation_*M_PI/180.0, Eigen::Vector3d::UnitZ()));
 		// std::cout<<"Res_rot:    \n"<<axis_rot_Z * mapping_<<std::endl;
@@ -135,8 +136,8 @@ void OmniMagnet::RotatingDipole(Eigen::Vector3d init_dipole, Eigen::Vector3d axi
 	while ( current_time - ref_time <test_duration){
 		current_time = std::chrono::high_resolution_clock::now();
 		// std::cout<<"------\n";
-		// std::cout<< ((Eigen::AngleAxisd(( 2.0 * M_PI * ((current_time - ref_time).count()/1000000000.0) * freq_), axis_rot)) * init_dipole) <<"\n";
-		SetCurrent(Dipole2Current((Eigen::AngleAxisd(( 2.0 * M_PI * ((current_time - ref_time).count()/1000000000.0) * freq_), axis_rot)) * init_dipole));
+		//std::cout<< ((Eigen::AngleAxisd(( 2.0 * M_PI * ((current_time - ref_time).count()/1000000000.0) * freq_), axis_rot)) * init_dipole) <<"\n";
+		SetCurrent(Dipole2Current((Eigen::AngleAxisd(( 2.0 * M_PI * ((ref_time - ref_time).count()/1000000000.0) * freq_), axis_rot)) * init_dipole));
 	};
 	std::cout<<"End rot!!!!!\n";
 	// std::cout<<"here";
