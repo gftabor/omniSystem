@@ -34,7 +34,15 @@ void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
   float run_time = msg-> runTime - int(1000*timeError);
   float freq = msg->frequency;
   ROS_INFO("commanding magnet %d with power of %f for %f",magnet,dipole_strength,run_time);
+
+  auto current = omni_system[magnet].Dipole2Current(dipole_strength*dipole_axis);
+  ROS_INFO("commanding magnet %d current %f  %f  %f",magnet,current[0],current[1],current[2]);
+
+
   omni_system[magnet].RotatingDipole(dipole_strength*dipole_axis, rotation_axis, freq, run_time); // rotates the dipole aling the given axis, with the given frequency for a given duration. (dipole, axis, frequency(Hz), duration(ms))
+
+
+
   Eigen::Vector3d OFFCommand;
   OFFCommand << 0,0,0;
   ROS_INFO("commanding magnet %d back off",magnet);
