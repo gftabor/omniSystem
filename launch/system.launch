@@ -1,6 +1,6 @@
 <launch>
    
-  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.396 0 0 0 camera center 10" />
+  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.36 0 0 0 camera center 10" />
   
   <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 3.14 0 world camera 10" />
 
@@ -32,7 +32,7 @@
 
 <node pkg="aruco_ros" type="single" name="aruco_single">
     <remap from="/camera_info" to="/camera/camera_info" />
-    <remap from="/image" to="/camera/image_mono" />
+    <remap from="/image" to="/camera/image_rect" />
     <remap from="/aruco_single/transform" to="/simple_aruco_detector/transforms"/>
     <param name="image_is_rectified" value="True"/>
     <param name="marker_size"        value="$(arg markerSize)"/>
