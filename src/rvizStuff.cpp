@@ -4,8 +4,10 @@
 
 int currentMag = -1;
 ros::Publisher marker_pub;
+ros::Time lastTime; 
 void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
 {
+  lastTime = msg->header.stamp;
   currentMag = msg->magnetNumber;
   visualization_msgs::Marker line_strip;
   line_strip.header.stamp =  msg->header.stamp;
@@ -49,7 +51,7 @@ int main( int argc, char** argv )
   marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
   ros::Subscriber omni1Sub = n.subscribe("omniMagnet", 1000, magCommandCallback);
-
+  lastTime = ros::Time::now();
 
   while (ros::ok())
   {
@@ -58,7 +60,7 @@ int main( int argc, char** argv )
       // Set the frame ID and timestamp.  See the TF tutorials for information on these.
 
 
-      marker.header.stamp = ros::Time::now();
+      marker.header.stamp = lastTime;
       marker.ns = "omniSystem";
       marker.id = i;
       //ROS_INFO("frame is %d",i);

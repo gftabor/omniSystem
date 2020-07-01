@@ -7,11 +7,11 @@ Panels:
         - /Global Options1
         - /Status1
         - /TF1/Frames1
+        - /Marker1/Status1
         - /Path1/Offset1
         - /Path2/Offset1
-        - /WrenchStamped3
       Splitter Ratio: 0.5
-    Tree Height: 344
+    Tree Height: 375
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -55,60 +55,26 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: false
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        camera:
-          Value: false
-        center:
-          Value: false
-        marker_id24:
-          Value: true
-        object:
-          Value: false
-        omni0:
-          Value: false
-        omni1:
-          Value: false
-        omni2:
-          Value: false
-        omni3:
-          Value: false
-        omni4:
-          Value: false
-        world:
-          Value: false
       Marker Scale: 0.75
       Name: TF
       Show Arrows: false
       Show Axes: true
       Show Names: false
       Tree:
-        world:
-          camera:
-            center:
-              omni0:
-                {}
-              omni1:
-                {}
-              omni2:
-                {}
-              omni3:
-                {}
-              omni4:
-                {}
-            marker_id24:
-              object:
-                {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: visualization_marker
       Name: Marker
       Namespaces:
         omniSystem: true
+        points_and_lines: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -137,25 +103,6 @@ Visualization Manager:
       Torque Color: 204; 204; 51
       Unreliable: false
       Value: false
-    - Class: rviz/Camera
-      Enabled: false
-      Image Rendering: background and overlay
-      Image Topic: /camera/image_mono
-      Name: Camera
-      Overlay Alpha: 0.5
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: false
-      Visibility:
-        Camera: true
-        Grid: true
-        Marker: true
-        Path: true
-        TF: true
-        Value: true
-        WrenchStamped: true
-      Zoom Factor: 1
     - Alpha: 0.100000001
       Buffer Length: 1
       Class: rviz/Path
@@ -170,7 +117,7 @@ Visualization Manager:
       Offset:
         X: 0
         Y: 0
-        Z: 0.0799999982
+        Z: -0.00999999978
       Pose Color: 255; 85; 255
       Pose Style: None
       Radius: 0.0299999993
@@ -226,7 +173,6 @@ Visualization Manager:
       Unreliable: false
       Value: true
       Visibility:
-        Camera: true
         Grid: true
         Marker: true
         Path: true
@@ -259,7 +205,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.14862311
+      Distance: 0.640636444
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -274,20 +220,20 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.04979658
+      Pitch: 1.3797965
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.72993135
+      Yaw: 4.6199131
     Saved: ~
 Window Geometry:
   Camera:
     collapsed: false
   Displays:
     collapsed: false
-  Height: 1026
+  Height: 1416
   Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd00000004000000000000025200000378fc020000000afb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000002800000199000000d700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d0065007200610000000164000000d00000001600fffffffb0000000c00430061006d00650072006101000001c7000001d90000001600ffffff000000010000010f00000378fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000002800000378000000ad00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000064f0000003efc0100000002fb0000000800540069006d006501000000000000064f0000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000003f70000037800000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000016a000004fefc020000000afb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000001b8000000d700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006101000001e6000003240000001600fffffffb0000000c00430061006d0065007200610100000510000000160000001600000016000000010000010f00000378fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000002800000378000000ad00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e1000001970000000300000d2f0000003efc0100000002fb0000000800540069006d0065010000000000000d2f0000030000fffffffb0000000800540069006d0065010000000000000450000000000000000000000bbf000004fe00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -296,6 +242,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1615
-  X: 1985
+  Width: 3375
+  X: 65
   Y: 24
