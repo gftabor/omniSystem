@@ -9,38 +9,41 @@ void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
 {
   lastTime = msg->header.stamp;
   currentMag = msg->magnetNumber;
-  visualization_msgs::Marker line_strip;
-  line_strip.header.stamp =  msg->header.stamp;
-  line_strip.header.frame_id =  msg->rotationAxis.header.frame_id;
+  visualization_msgs::Marker arrow;
+  arrow.header.stamp =  msg->header.stamp;
+  arrow.header.frame_id =  msg->rotationAxis.header.frame_id;
 
   
-  line_strip.ns ="points_and_lines";
-  line_strip.action = visualization_msgs::Marker::ADD;
-  line_strip.type = visualization_msgs::Marker::LINE_STRIP;
+  arrow.ns ="dipole_axis";
+  arrow.action = visualization_msgs::Marker::ADD;
+  arrow.type = visualization_msgs::Marker::ARROW;
 
+  float length = 0.2;
 
-  line_strip.pose.orientation.w =  1.0;
-  line_strip.id = 10;
+  arrow.pose.orientation.w =  1.0;
+  arrow.id = 10;
 
-  line_strip.scale.x = 0.1;
+  arrow.scale.x = 0.05 * length;
+  arrow.scale.y = 0.1 * length;
+  arrow.scale.z = 0.2 * length;
+
   // Line strip is blue
-  line_strip.color.b = 1.0;
-  line_strip.color.a = 1.0;
+  arrow.color.b = 1.0;
+  arrow.color.a = 1.0;
 
 
   geometry_msgs::Point p;
   p.x = 0;
   p.y = 0;
   p.z = 0;
-  line_strip.points.push_back(p);
-
+  arrow.points.push_back(p);
 
   geometry_msgs::Point p2;
-  p2.x = msg->rotationAxis.vector.x;
-  p2.y = msg->rotationAxis.vector.y;
-  p2.z = msg->rotationAxis.vector.z;
-  line_strip.points.push_back(p2);
-  marker_pub.publish(line_strip);
+  p2.x = msg->rotationAxis.vector.x * length;
+  p2.y = msg->rotationAxis.vector.y * length;
+  p2.z = msg->rotationAxis.vector.z * length;
+  arrow.points.push_back(p2);
+  marker_pub.publish(arrow);
 }
 
 int main( int argc, char** argv )
@@ -51,6 +54,7 @@ int main( int argc, char** argv )
   marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
   ros::Subscriber omni1Sub = n.subscribe("omniMagnet", 1000, magCommandCallback);
+  ros::Duration(2.5).sleep(); 
   lastTime = ros::Time::now();
 
   while (ros::ok())

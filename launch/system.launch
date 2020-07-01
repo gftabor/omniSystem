@@ -6,15 +6,15 @@
 
   <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.50 0.30 -0.25 0 0 3.14 center omni0 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.120 0.120 0.150 3.14 -3.14 0 center omni1 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.10 0.10 0.150 3.14 -3.14 0 center omni1 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.120 0.120 0.15 3.14 -3.14 0 center omni2 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.10 0.10 0.15 3.14 -3.14 0 center omni2 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.120 -0.120 0.15 0 -3.14 0 center omni3 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.10 -0.10 0.15 0 -3.14 0 center omni3 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.12 -0.120 0.15 0 -3.14 0 center omni4 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.1 -0.10 0.15 0 -3.14 0 center omni4 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 0 marker_id24 object 10" />
+  <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 1.67 marker_id24 object 10" />
 
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find omniSystem)/rviz/config_file.rviz" />
   <node type="rqt_console" name="console" pkg="rqt_console" />
