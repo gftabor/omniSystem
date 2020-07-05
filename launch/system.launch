@@ -4,9 +4,9 @@
   
   <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 3.14 0 world camera 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.50 0.30 -0.25 0 0 3.14 center omni0 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.10 0.10 0.150 -1.57 -1.57 0 center omni0 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.10 0.10 0.150 3.14 -3.14 0 center omni1 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.50 0.30 -0.25 3.14 -3.14 0 center omni1 10" />
 
   <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.10 0.10 0.15 3.14 -3.14 0 center omni2 10" />
 
