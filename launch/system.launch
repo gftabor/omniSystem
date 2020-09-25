@@ -32,7 +32,7 @@
 
 <node pkg="aruco_ros" type="single" name="aruco_single">
     <remap from="/camera_info" to="/camera/camera_info" />
-    <remap from="/image" to="/camera/image_rect" />
+    <remap from="/image" to="/camera/image_rect_fast" />
     <remap from="/aruco_single/transform" to="/simple_aruco_detector/transforms"/>
     <param name="image_is_rectified" value="True"/>
     <param name="marker_size"        value="$(arg markerSize)"/>
@@ -43,19 +43,28 @@
     <param name="corner_refinement"  value="$(arg corner_refinement)" />
 </node>
 <node pkg="rostopic" type="rostopic" name="arbitrary_name" args="echo /simple_aruco_detector/transforms " output="log"/>
+<node pkg="topic_tools" type="relay" name="bandwidth_fixer" args="/camera/image_rect /camera/image_rect_fast" />
 
   <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="traj_true" output="log">
     <param name="target_frame_name" type="string" value="/center" />
     <param name="source_frame_name" type="string" value="/object" />
-    <param name="trajectory_update_rate" type="double" value="4" />
-    <param name="trajectory_publish_rate" type="double" value="0.25" />
+    <param name="trajectory_update_rate" type="double" value="5" />
+    <param name="trajectory_publish_rate" type="double" value="5" />
     <remap from="trajectory" to="/trajectory/path" />
   </node>
+  <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="traj_true_slow" output="log">
+    <param name="target_frame_name" type="string" value="/center" />
+    <param name="source_frame_name" type="string" value="/object" />
+    <param name="trajectory_update_rate" type="double" value="0.05" />
+    <param name="trajectory_publish_rate" type="double" value="1" />
+    <remap from="trajectory" to="/trajectory/path_slow" />
+  </node>
+
   <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="traj_goal" output="log">
     <param name="target_frame_name" type="string" value="/center" />
     <param name="source_frame_name" type="string" value="/goal" />
-    <param name="trajectory_update_rate" type="double" value="4" />
-    <param name="trajectory_publish_rate" type="double" value="0.25" />
+    <param name="trajectory_update_rate" type="double" value="1" />
+    <param name="trajectory_publish_rate" type="double" value="1" />
     <remap from="trajectory" to="/trajectory/goal" />
   </node>
 

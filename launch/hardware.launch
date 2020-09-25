@@ -21,7 +21,7 @@
   <arg name="control_frame_rate"        default="false" />
   <arg name="frame_rate"                default="30" />
 
-  <node pkg="image_view" type="image_view" name="image_view" args="image:=/camera/image_mono"/>
+ <!-- <node pkg="image_view" type="image_view" name="image_view" args="image:=/camera/image_rect"/>-->
 
   <group ns="$(arg camera_name)">
     <!-- Nodelet manager -->
@@ -34,7 +34,7 @@
       <param name="frame_id"                        value="camera" />
       <param name="serial"                          value="$(arg camera_serial)" />
 
-      as<!-- Frame rate -->
+      <!-- Frame rate -->
       <param name="acquisition_frame_rate_enable"   value="$(arg control_frame_rate)" />
       <param name="acquisition_frame_rate"          value="$(arg frame_rate)" />
 
