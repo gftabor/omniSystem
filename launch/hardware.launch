@@ -47,5 +47,10 @@
     <node pkg="nodelet" type="nodelet" name="image_proc_debayer" machine="omni" 
           args="load image_proc/debayer camera_nodelet_manager">
     </node>
+
+        <!-- Debayering nodelet -->
+    <node pkg="nodelet" type="nodelet" name="image_proc_rectify" machine="omni" 
+          args="load image_proc/rectify camera_nodelet_manager">
+    </node>
   </group> 
 </launch>
