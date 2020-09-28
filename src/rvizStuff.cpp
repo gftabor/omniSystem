@@ -107,8 +107,10 @@ void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
 
   visualization_msgs::Marker cube = setupCube(currentMag);
   cube.id = 11;
-  cube.color.a = 0.60;
+  cube.color.a = 0.35;
   cube.ns = "dipole_axis";
+  cube.header.frame_id =  msg->rotationAxis.header.frame_id;
+
   marker_pub.publish(cube);
 
 
@@ -119,7 +121,7 @@ int main( int argc, char** argv )
 {
   ros::init(argc, argv, "basic_shapes");
   ros::NodeHandle n;
-  ros::Rate r(10);
+  ros::Rate r(1);
   marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
   ros::Duration(2.5).sleep(); 
@@ -155,7 +157,8 @@ int main( int argc, char** argv )
         marker.scale.x = 0.05;
         marker.scale.y = 0.05;
         marker.scale.z = 0.05;
-        marker.color.a = 0.80;
+        marker.color.a = 0.70;
+        //marker.pose.position.z = -0.02;
 
         break;
       } 

@@ -5,9 +5,10 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /TF1/Frames1
-        - /Marker1
         - /Marker1/Namespaces1
         - /Path1/Offset1
+        - /Path2/Status1
+        - /Camera1
       Splitter Ratio: 0.5
     Tree Height: 157
   - Class: rviz/Selection
@@ -71,7 +72,7 @@ Visualization Manager:
       Marker Topic: visualization_marker
       Name: Marker
       Namespaces:
-        dipole_axis: true
+        dipole_axis: false
         omniSystem: true
       Queue Size: 100
       Value: true
@@ -129,29 +130,6 @@ Visualization Manager:
       Class: rviz/Path
       Color: 255; 255; 0
       Enabled: true
-      Head Diameter: 0.00899999961
-      Head Length: 0.0149999997
-      Length: 0.300000012
-      Line Style: Billboards
-      Line Width: 0.00100000005
-      Name: Path
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Pose Color: 0; 0; 127
-      Pose Style: Arrows
-      Radius: 0.0299999993
-      Shaft Diameter: 0.00300000003
-      Shaft Length: 0.0299999993
-      Topic: /trajectory/path_slow
-      Unreliable: false
-      Value: true
-    - Alpha: 1
-      Buffer Length: 1
-      Class: rviz/Path
-      Color: 255; 255; 0
-      Enabled: true
       Head Diameter: 0.300000012
       Head Length: 0.200000003
       Length: 0.300000012
@@ -168,6 +146,29 @@ Visualization Manager:
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
       Topic: /trajectory/path
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 255; 255; 0
+      Enabled: true
+      Head Diameter: 0.00899999961
+      Head Length: 0.0149999997
+      Length: 0.300000012
+      Line Style: Billboards
+      Line Width: 0.00100000005
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 0; 0; 127
+      Pose Style: Arrows
+      Radius: 0.0299999993
+      Shaft Diameter: 0.00300000003
+      Shaft Length: 0.0299999993
+      Topic: /trajectory/path_slow
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -199,9 +200,9 @@ Visualization Manager:
     - Class: rviz/Camera
       Enabled: true
       Image Rendering: background and overlay
-      Image Topic: /camera/image_rect
+      Image Topic: /camera/image_rect_fast
       Name: Camera
-      Overlay Alpha: 0.5
+      Overlay Alpha: 0
       Queue Size: 2
       Transport Hint: raw
       Unreliable: false
@@ -213,7 +214,7 @@ Visualization Manager:
         TF: true
         Value: true
         WrenchStamped: true
-      Zoom Factor: 1
+      Zoom Factor: 2
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -239,7 +240,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.504936457
+      Distance: 0.356494904
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -254,10 +255,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.33479631
+      Pitch: 1.56979632
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.68991184
+      Yaw: 4.74492121
     Saved: ~
 Window Geometry:
   Camera:
