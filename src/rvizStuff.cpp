@@ -121,7 +121,7 @@ int main( int argc, char** argv )
 {
   ros::init(argc, argv, "basic_shapes");
   ros::NodeHandle n;
-  ros::Rate r(1);
+  ros::Rate r(10);
   marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
   ros::Duration(2.5).sleep(); 
@@ -130,7 +130,7 @@ int main( int argc, char** argv )
 
   while (ros::ok())
   {
-    for(int i =0;i<7;i++){
+    for(int i =0;i<8;i++){
       // Set the frame ID and timestamp.  See the TF tutorials for information on these.
 
       visualization_msgs::Marker marker = setupCube(i);
@@ -159,6 +159,24 @@ int main( int argc, char** argv )
         marker.scale.z = 0.05;
         marker.color.a = 0.70;
         //marker.pose.position.z = -0.02;
+        break;
+      case 7:
+        marker.ns ="current_orientation";
+        marker.header.frame_id = "/object";
+        marker.type = visualization_msgs::Marker::ARROW;
+
+        marker.pose.orientation.w =  1.0;
+        marker.id = 7;
+
+        float multiplier = 2.0;
+        marker.scale.x = (0.03 + 0.015) * multiplier;
+        marker.scale.y = 0.003 * multiplier;
+        marker.scale.z = 0.003 * multiplier;
+        marker.color.r = 0.0f;
+        marker.color.g = 0.0f;
+        marker.color.b = 1.0f;
+        marker.color.a = 1.0;
+
 
         break;
       } 

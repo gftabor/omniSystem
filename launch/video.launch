@@ -1,6 +1,7 @@
 <launch>
    
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find omniSystem)/rviz/config_file.rviz" />
+  <node type="rvizStuff" name="rvizStuff" pkg="omniSystem" />
 
 
 
