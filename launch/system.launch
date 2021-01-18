@@ -4,9 +4,9 @@
   
   <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 3.14 0 world camera 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.10 0.10 0.150 -1.57 -1.57 0 center omni0 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.50 0.30 -0.250 -1.57 -1.57 0 center omni0 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.50 0.30 -0.25 3.14 -3.14 0 center omni1 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.10 0.10 0.15 3.14 -3.14 0 center omni1 10" />
 
   <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.10 0.10 0.15 3.14 -3.14 0 center omni2 10" />
 
@@ -44,7 +44,7 @@
   </node>
   <node pkg="rostopic" type="rostopic" name="arbitrary_name" args="echo /simple_aruco_detector/transforms " output="log"/>
   <node pkg="topic_tools" type="relay" name="bandwidth_fixer" args="/camera/image_rect /camera/image_rect_fast" />
-  <node pkg="topic_tools" type="throttle" name="record_friendly_camera" args="messages /camera/image_rect_fast 0.5 /camera/image_rect_slow " />
+  <node pkg="topic_tools" type="throttle" name="record_friendly_camera" args="messages /camera/image_rect_fast 2 /camera/image_rect_slow " />
 
   <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="traj_true" output="log">
     <param name="target_frame_name" type="string" value="/center" />
