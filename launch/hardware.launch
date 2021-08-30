@@ -2,7 +2,7 @@
   <machine
      name="omni"
      default="never"
-     address="192.168.1.2" user="ashkan"
+     address="10.42.0.2" user="ashkan"
      password="Ashipouri"
      env-loader="/home/ashkan/catkin_ws/src/omniSystem/launch/omniMachine.env"
   />

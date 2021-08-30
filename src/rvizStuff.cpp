@@ -41,19 +41,19 @@ visualization_msgs::Marker setupCube(int magNumber){
   marker.color.a = 0.20;
   switch(magNumber){
       case 0:
-        marker.header.frame_id = "/omni0";
+        marker.header.frame_id = "omni0";
         break;
       case 1:
-        marker.header.frame_id = "/omni1";
+        marker.header.frame_id = "omni1";
         break;
       case 2:
-        marker.header.frame_id = "/omni2";
+        marker.header.frame_id = "omni2";
         break;
       case 3:
-        marker.header.frame_id = "/omni3";
+        marker.header.frame_id = "omni3";
         break;
       case 4:
-        marker.header.frame_id = "/omni4";
+        marker.header.frame_id = "omni4";
         break;
       }
   return marker;
@@ -140,7 +140,7 @@ int main( int argc, char** argv )
       switch (i)
       {
       case 5:
-        marker.header.frame_id = "/center";
+        marker.header.frame_id = "center";
         marker.scale.x = 0.62;
         marker.scale.y = 0.38;
         marker.scale.z = 0.125;
@@ -149,7 +149,7 @@ int main( int argc, char** argv )
         marker.color.b = 1.0f;
         break;
       case 6:
-        marker.header.frame_id = "/object";
+        marker.header.frame_id = "object";
         marker.type =  visualization_msgs::Marker::SPHERE;
         marker.color.r = 0.722f;
         marker.color.g = 0.451f;
@@ -162,7 +162,7 @@ int main( int argc, char** argv )
         break;
       case 7:
         marker.ns ="current_orientation";
-        marker.header.frame_id = "/object";
+        marker.header.frame_id = "object";
         marker.type = visualization_msgs::Marker::ARROW;
 
         marker.pose.orientation.w =  1.0;
