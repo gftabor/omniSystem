@@ -20,7 +20,7 @@
   <node type="rqt_console" name="console" pkg="rqt_console" />
 
   <node type="rvizStuff" name="rvizStuff" pkg="omniSystem" />
-  <include file="$(find omniSystem)/launch/hardware.launch"/>
+  <!--<include file="$(find omniSystem)/launch/hardware.launch"/>-->
 
   <arg name="markerId"        default="26"/>
   <arg name="markerSize"      default="0.092"/><!--0.06604-->    <!-- in m -->
