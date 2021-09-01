@@ -1,18 +1,19 @@
 <launch>
    
-  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.36 0 0 0 camera center 10" />
+  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.52 0 0 0 camera center 10" />
   
   <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 3.14 0 world camera 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.50 0.30 -0.250 -1.57 -1.57 0 center omni0 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.50 0.30 -0.250 0 0 0 center omni1 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.10 0.10 0.15 3.14 -3.14 0 center omni1 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.10 0.10 0.15 1.57 0 1.57 center omni0 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.10 0.10 0.15 3.14 -3.14 0 center omni2 10" />
+ <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.10 0.10 0.15 -1.57 -3.14 0 center omni2 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.10 -0.10 0.15 0 -3.14 0 center omni3 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.1 -0.10 0.15 0 -3.14 0 center omni4 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.10 -0.10 0.15 3.14 3.14 0 center omni3 10" />
+
+  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.1 -0.10 0.15 -1.57 0 0 center omni4 10" />
 
   <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 1.67 marker_id24 object 10" />
 
@@ -47,23 +48,23 @@
   <node pkg="topic_tools" type="throttle" name="record_friendly_camera" args="messages /camera/image_rect_fast 2 /camera/image_rect_slow " />
 
   <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="traj_true" output="log">
-    <param name="target_frame_name" type="string" value="/center" />
-    <param name="source_frame_name" type="string" value="/object" />
+    <param name="target_frame_name" type="string" value="center" />
+    <param name="source_frame_name" type="string" value="object" />
     <param name="trajectory_update_rate" type="double" value="5" />
     <param name="trajectory_publish_rate" type="double" value="5" />
     <remap from="trajectory" to="/trajectory/path" />
   </node>
   <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="traj_true_slow" output="log">
-    <param name="target_frame_name" type="string" value="/center" />
-    <param name="source_frame_name" type="string" value="/object" />
+    <param name="target_frame_name" type="string" value="center" />
+    <param name="source_frame_name" type="string" value="object" />
     <param name="trajectory_update_rate" type="double" value="0.05" />
     <param name="trajectory_publish_rate" type="double" value="1" />
     <remap from="trajectory" to="/trajectory/path_slow" />
   </node>
 
   <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="traj_goal" output="log">
-    <param name="target_frame_name" type="string" value="/center" />
-    <param name="source_frame_name" type="string" value="/goal" />
+    <param name="target_frame_name" type="string" value="center" />
+    <param name="source_frame_name" type="string" value="goal" />
     <param name="trajectory_update_rate" type="double" value="1" />
     <param name="trajectory_publish_rate" type="double" value="1" />
     <remap from="trajectory" to="/trajectory/goal" />
