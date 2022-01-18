@@ -12,14 +12,14 @@
 
   <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.50 0.30 -0.250 0 0 0 center omni1 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.089 0.102 0.15 $(arg pi/2) 0 $(arg pi/2) center omni0 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.1 0.1 0.15 $(arg pi/2) 0 $(arg pi/2) center omni0 10" />
 
- <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.111 0.1 0.15 -1.57 -$(arg pi) 0 center omni2 10" />
+ <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.1 0.1 0.15 -1.57 -$(arg pi) 0 center omni2 10" />
 
 
-  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.111 -0.104 0.15 3.14 $(arg pi) 0 center omni3 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.1 -0.1 0.15 3.14 $(arg pi) 0 center omni3 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.091 -0.102 0.15 -$(arg pi/2) 0 0 center omni4 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.1 -0.1 0.15 -$(arg pi/2) 0 0 center omni4 10" />
 
   <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 $(arg pi/2) marker_id24 object 10" />
 
@@ -56,10 +56,11 @@
     <remap from="trajectory" to="/trajectory/goal" />
   </node>
 
-    <arg name="camera" default="/camera/image_mono" />
+   <!--
+   <arg name="camera" default="/camera/image_mono" />
     <arg name="camera_info" default="/camera/camera_info" />
     <arg name="tf_prefix" default="marker_id" />
-    <arg name="show_detections" default="true" />
+    <arg name="show_detections" default="false" />
     <arg name="marker_size" default="0.092" doc="length of the physical marker's side in meters"/>
     <arg name="aruco_dictionary" default="DICT_5X5_100" />
     <node pkg="simple_aruco_detector" type="node" name="simple_aruco_detector" output="screen">
@@ -73,5 +74,25 @@
         <param name="blur_window_size" type="int" value="7"/>
         <param name="aruco_adaptiveThreshWinSizeStep" type="int" value="1"/>
     </node>
+-->
+
+
+  <arg name="launch_prefix" default="" /> 
+  <arg name="node_namespace" default="apriltag_ros_continuous_node" />
+  <arg name="camera_name" default="/camera" />
+  <arg name="image_topic" default="image_rect_fast" />
+
+  <rosparam command="load" file="$(find omniSystem)/config/settings.yaml" ns="$(arg node_namespace)" />
+  <rosparam command="load" file="$(find omniSystem)/config/tag.yaml" ns="$(arg node_namespace)" />
+  
+  <node pkg="apriltag_ros" type="apriltag_ros_continuous_node" name="$(arg node_namespace)" clear_params="true" output="screen" launch-prefix="$(arg launch_prefix)" >
+    <remap from="image_rect" to="$(arg camera_name)/$(arg image_topic)" />
+    <remap from="camera_info" to="$(arg camera_name)/camera_info" />
+
+    <param name="publish_tag_detections_image" type="bool" value="true" />    
+  </node>
+
+
+
 
 </launch>
