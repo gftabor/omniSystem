@@ -53,15 +53,5 @@
           args="load image_proc/rectify camera_nodelet_manager">
     </node>
 
-    <node pkg="nodelet" type="nodelet" name="image_proc_decimate" machine="omni" 
-          args="load image_proc/crop_decimate camera_nodelet_manager">
-
-      <param name="width"                        value="1920" />
-      <param name="height"                        value="1080" />
-      <param name="x_offset"                        value="0" />
-      <param name="y_offset"                        value="500" />
-
-    </node>
-
   </group> 
 </launch>

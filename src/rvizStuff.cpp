@@ -158,6 +158,8 @@ int main( int argc, char** argv )
         marker.scale.y = 0.05;
         marker.scale.z = 0.05;
         marker.color.a = 0.70;
+        marker.ns ="object";
+
         //marker.pose.position.z = -0.02;
         break;
       case 7:
@@ -172,9 +174,9 @@ int main( int argc, char** argv )
         marker.scale.x = (0.03 + 0.015) * multiplier;
         marker.scale.y = 0.003 * multiplier;
         marker.scale.z = 0.003 * multiplier;
-        marker.color.r = 0.0f;
+        marker.color.r = 1.0f;
         marker.color.g = 0.0f;
-        marker.color.b = 1.0f;
+        marker.color.b = 0.0f;
         marker.color.a = 1.0;
 
 

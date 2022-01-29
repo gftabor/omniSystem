@@ -27,20 +27,6 @@
 
 <rosparam param="use_sim_time">1</rosparam>
 
-  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.36 0 0 0 camera center 10" />
-  
-  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 3.14 0 world camera 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.50 0.30 -0.250 -1.57 -1.57 0 center omni0 10" />
-
-  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.10 0.10 0.15 3.14 -3.14 0 center omni1 10" />
-
-  <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.10 0.10 0.15 3.14 -3.14 0 center omni2 10" />
-
-  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.10 -0.10 0.15 0 -3.14 0 center omni3 10" />
-
-  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.1 -0.10 0.15 0 -3.14 0 center omni4 10" />
-
-  <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 1.67 marker_id24 object 10" />
 
 </launch>

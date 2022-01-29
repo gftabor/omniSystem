@@ -1,10 +1,11 @@
 <launch>
   <arg name="pi" default="3.141592653589793238462643" />
   <arg name="pi/2" default="$(eval 0.5* arg('pi'))" />
+  <arg name="z_value" default="0.15" />
 
 
 
-  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0 0 0.52 0 0 0 camera center 10" />
+  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="-0.00108274 -0.00247717 0.55689677 0.01231406 0.03846476 -0.01191819 camera center 10" />
 
   <node pkg="tf" type="static_transform_publisher" name="sensor_broadcaster" args="0 0 0.085 0 0 -$(arg pi/2) center sensor 10" />
 
@@ -12,14 +13,14 @@
 
   <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.50 0.30 -0.250 0 0 0 center omni1 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.1 0.1 0.15 $(arg pi/2) 0 $(arg pi/2) center omni0 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="0.1 0.1 $(arg z_value) $(arg pi/2) 0 $(arg pi/2) center omni0 10" />
 
- <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.1 0.1 0.15 -1.57 -$(arg pi) 0 center omni2 10" />
+ <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-0.1 0.1 $(arg z_value) -1.57 -$(arg pi) 0 center omni2 10" />
 
 
-  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.1 -0.1 0.15 3.14 $(arg pi) 0 center omni3 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.1 -0.1 $(arg z_value) 3.14 $(arg pi) 0 center omni3 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.1 -0.1 0.15 -$(arg pi/2) 0 0 center omni4 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.1 -0.1 $(arg z_value) -$(arg pi/2) 0 0 center omni4 10" />
 
   <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 $(arg pi/2) marker_id24 object 10" />
 
