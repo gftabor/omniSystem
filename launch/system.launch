@@ -22,7 +22,7 @@
 
   <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="0.1 -0.1 $(arg z_value) -$(arg pi/2) 0 0 center omni4 10" />
 
-  <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 $(arg pi/2) marker_id24 object 10" />
+  <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 $(arg pi) marker_id24 object 10" />
 
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find omniSystem)/rviz/config_file.rviz" />
   <node type="rqt_console" name="console" pkg="rqt_console" />
