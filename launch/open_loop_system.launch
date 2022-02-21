@@ -1,0 +1,46 @@
+<launch>
+  <arg name="pi" default="3.141592653589793238462643" />
+  <arg name="pi/2" default="$(eval 0.5* arg('pi'))" />
+  <arg name="z_value" default="0.0" />
+
+  <arg name="x_value" default="$(eval 0.5*0.4075)" />
+  <arg name="y_value" default="0.1" />
+
+
+
+
+
+  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="-0.00108274 -0.00247717 0.6 0.01231406 0.03846476 -0.01191819 camera center 10" />
+  <node pkg="tf" type="static_transform_publisher" name="sensor_broadcaster" args="0 0 0.085 0 0 -$(arg pi/2) center sensor 10" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 $(arg pi) 0 world camera 10" />
+
+
+  <node pkg="tf" type="static_transform_publisher" name="omni0_broadcaster" args="$(arg x_value) $(arg y_value) $(arg z_value) $(arg pi/2) 0 $(arg pi/2) center omni0 10" />
+<!-- unimportant poses-->
+  <node pkg="tf" type="static_transform_publisher" name="omni2_broadcaster" args="-$(arg x_value) $(arg y_value) $(arg z_value)  -1.57 -$(arg pi) 0 center omni2 10" /> 
+
+
+  <node pkg="tf" type="static_transform_publisher" name="omni4_broadcaster" args="5 -$(arg y_value) $(arg z_value) -$(arg pi/2) 0 0 center omni4 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-5 -$(arg y_value) $(arg z_value)  3.14 $(arg pi) 0 center omni3 10" />
+  <node pkg="tf" type="static_transform_publisher" name="omni1_broadcaster" args="0.50 0.30 -0.250 0 0 0 center omni1 10" />
+  <node pkg="tf" type="static_transform_publisher" name="object_broadcaster" args="0 0 0 0 0 $(arg pi) marker_id24 object 10" />
+
+
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find omniSystem)/rviz/config_file.rviz" />
+  <node type="rqt_console" name="console" pkg="rqt_console" />
+ 
+  <param name="tank_width" type="double" value="0.28" />
+  <param name="tank_length" type="double" value="0.39" />
+  <param name="tank_height" type="double" value="0.15" />
+
+  <node type="rvizStuff" name="rvizStuff" pkg="omniSystem" />
+  <include file="$(find omniSystem)/launch/camera_tracking.launch"/>
+
+  <node pkg="topic_tools" type="relay" name="bandwidth_fixer" args="/camera/image_rect /camera/image_rect_fast" />
+  <node pkg="topic_tools" type="throttle" name="record_friendly_camera" args="messages /camera/image_rect_fast 2 /camera/image_rect_slow " />
+
+
+
+
+
+</launch>

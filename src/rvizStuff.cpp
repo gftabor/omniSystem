@@ -103,7 +103,7 @@ void magCommandCallback(const omniSystem::OmniRotationCommand::ConstPtr& msg)
   p2.z = msg->rotationAxis.vector.z * length;
   arrow.points.push_back(p2);
   marker_pub.publish(arrow);
-
+  ros::Duration(0.001).sleep();
 
   visualization_msgs::Marker cube = setupCube(currentMag);
   cube.id = 11;
@@ -122,11 +122,17 @@ int main( int argc, char** argv )
   ros::init(argc, argv, "basic_shapes");
   ros::NodeHandle n;
   ros::Rate r(10);
-  marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+  marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 10);
 
   ros::Duration(2.5).sleep(); 
   lastTime = ros::Time::now();
   ros::Subscriber omni1Sub = n.subscribe("omniMagnet", 1000, magCommandCallback);
+
+  float tank_width, tank_length, tank_height;
+  n.param<float>("tank_width", tank_width, 0.62);
+  n.param<float>("tank_length", tank_length, 0.38);
+  n.param<float>("tank_height", tank_height, 0.125);
+
 
   while (ros::ok())
   {
@@ -141,9 +147,9 @@ int main( int argc, char** argv )
       {
       case 5:
         marker.header.frame_id = "center";
-        marker.scale.x = 0.62;
-        marker.scale.y = 0.38;
-        marker.scale.z = 0.125;
+        marker.scale.x = tank_width;
+        marker.scale.y = tank_length;
+        marker.scale.z = tank_height;
         marker.color.r = 0.0f;
         marker.color.g = 0.0f;
         marker.color.b = 1.0f;
