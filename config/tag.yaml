@@ -20,10 +20,10 @@
 standalone_tags:
   [
    {id: 0, size: 0.092, name: marker_id24},
-   #{id: 10, size: 0.092, name: mag1},
-   #{id: 11, size: 0.092, name: mag3},
+   #{id: 10, size: 0.092, name: mag0},
+   #{id: 11, size: 0.092, name: mag1},
    #{id: 12, size: 0.092, name: mag2},
-   #{id: 13, size: 0.092, name: mag0},
+   #{id: 13, size: 0.092, name: mag3},
 
   ]
 # ## Tag bundle definitions

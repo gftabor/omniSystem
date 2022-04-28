@@ -5,7 +5,7 @@
 
 
 
-  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="-0.00108274 -0.00247717 0.55689677 0.01231406 0.03846476 -0.01191819 camera center 10" />
+  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0.006433223208916055 0.013499697412765127 0.5597259551960686 0.011440347539569094 0.018114741062589174 0.0003529102281108608 camera center 10" />
   <node pkg="tf" type="static_transform_publisher" name="sensor_broadcaster" args="0 0 0.085 0 0 -$(arg pi/2) center sensor 10" />
   <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 $(arg pi) 0 world camera 10" />
 

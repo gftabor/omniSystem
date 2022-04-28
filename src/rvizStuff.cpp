@@ -36,7 +36,7 @@ visualization_msgs::Marker setupCube(int magNumber){
 
   // Set the color -- be sure to set alpha to something non-zero!
   marker.color.r = 1.0f;
-  marker.color.g = 0.0f;
+  marker.color.g = 1.0f;
   marker.color.b = 0.0f;
   marker.color.a = 0.20;
   switch(magNumber){
@@ -160,9 +160,9 @@ int main( int argc, char** argv )
         marker.color.r = 0.722f;
         marker.color.g = 0.451f;
         marker.color.b = 0.20f;
-        marker.scale.x = 0.05;
-        marker.scale.y = 0.05;
-        marker.scale.z = 0.05;
+        marker.scale.x = 0.04;
+        marker.scale.y = 0.04;
+        marker.scale.z = 0.04;
         marker.color.a = 0.70;
         marker.ns ="object";
 
@@ -181,7 +181,7 @@ int main( int argc, char** argv )
         marker.scale.y = 0.003 * multiplier;
         marker.scale.z = 0.003 * multiplier;
         marker.color.r = 1.0f;
-        marker.color.g = 0.0f;
+        marker.color.g = 1.0f;
         marker.color.b = 0.0f;
         marker.color.a = 1.0;
 
