@@ -5,7 +5,7 @@
 
 
 
-  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="0.006433223208916055 0.013499697412765127 0.5597259551960686 0.011440347539569094 0.018114741062589174 0.0003529102281108608 camera center 10" />
+  <node pkg="tf" type="static_transform_publisher" name="center_broadcaster" args="-0.02474150917402801 0.017534709568667647 0.5347894219586039 0.027069473360493496 -0.0030711498370636866 0.027733357179363902 camera center 10" />
   <node pkg="tf" type="static_transform_publisher" name="sensor_broadcaster" args="0 0 0.085 0 0 -$(arg pi/2) center sensor 10" />
   <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster" args="0 0 0 0 $(arg pi) 0 world camera 10" />
 
@@ -25,8 +25,6 @@
 
   <node pkg="topic_tools" type="relay" name="bandwidth_fixer" args="/camera/image_rect /camera/image_rect_fast" />
   <node pkg="topic_tools" type="throttle" name="record_friendly_camera" args="messages /camera/image_rect_fast 2 /camera/image_rect_slow " />
-
-
 
 
 
