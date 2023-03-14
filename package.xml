@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>omniSystem</name>
+  <name>omnimagnet_system_driver</name>
   <version>0.0.0</version>
   <description>The omniSystem package</description>
 

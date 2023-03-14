@@ -1,13 +1,6 @@
 <launch>
-  <machine
-     name="omni"
-     default="never"
-     address="10.42.0.2" user="ashkan"
-     password="Ashipouri"
-     env-loader="/home/ashkan/catkin_ws/src/omniSystem/launch/omniMachine.env"
-  />
 
-  <node type="omni_node" name="omni_node" pkg="omniSystem" machine="omni" output="log" />
+  <node type="omni_node" name="omni_node" pkg="omnimagnet_system_driver" output="log" />
  <!-- <node type="camera_node" name="camera_node" pkg="omniSystem" machine="omni" output="screen" respawn="true"/>-->
 
 
@@ -25,7 +18,7 @@
 
   <group ns="$(arg camera_name)">
     <!-- Nodelet manager -->
-    <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" cwd="node" output="screen" machine="omni" />
+    <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" cwd="node" output="screen"/>
 
     <!-- Camera nodelet -->
     <node pkg="nodelet" type="nodelet" name="spinnaker_camera_nodelet" machine="omni" 
@@ -52,6 +45,5 @@
     <node pkg="nodelet" type="nodelet" name="image_proc_rectify" machine="omni" 
           args="load image_proc/rectify camera_nodelet_manager">
     </node>
-
   </group> 
 </launch>
