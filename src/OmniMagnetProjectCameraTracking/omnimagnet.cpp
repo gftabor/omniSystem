@@ -137,7 +137,7 @@ void OmniMagnet::RotatingDipole(Eigen::Vector3d init_dipole, Eigen::Vector3d axi
 		current_time = std::chrono::high_resolution_clock::now();
 		// std::cout<<"------\n";
 		//std::cout<< ((Eigen::AngleAxisd(( 2.0 * M_PI * ((current_time - ref_time).count()/1000000000.0) * freq_), axis_rot)) * init_dipole) <<"\n";
-		SetCurrent(Dipole2Current((Eigen::AngleAxisd(( 2.0 * M_PI * ((ref_time - ref_time).count()/1000000000.0) * freq_), axis_rot)) * init_dipole));
+		SetCurrent(Dipole2Current((Eigen::AngleAxisd(( 2.0 * M_PI * ((current_time - ref_time).count()/1000000000.0) * freq_), axis_rot)) * init_dipole));
 	};
 	std::cout<<"End rot!!!!!\n";
 	// std::cout<<"here";
