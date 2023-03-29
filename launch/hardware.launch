@@ -1,7 +1,7 @@
 <launch>
 
   <node type="omni_node" name="omni_node" pkg="omnimagnet_system_driver" output="log" />
- <!-- <node type="camera_node" name="camera_node" pkg="omniSystem" machine="omni" output="screen" respawn="true"/>-->
+ <!-- <node type="camera_node" name="camera_node" pkg="omniSystem" output="screen" respawn="true"/>-->
 
 
   <arg name="camera_name"               default="camera" />
@@ -21,7 +21,7 @@
     <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" cwd="node" output="screen"/>
 
     <!-- Camera nodelet -->
-    <node pkg="nodelet" type="nodelet" name="spinnaker_camera_nodelet" machine="omni" 
+    <node pkg="nodelet" type="nodelet" name="spinnaker_camera_nodelet" 
           args="load spinnaker_camera_driver/SpinnakerCameraNodelet camera_nodelet_manager" >
 
       <param name="frame_id"                        value="camera" />
@@ -38,7 +38,7 @@
 
   <node pkg="nodelet" type="nodelet"
         args="load image_proc/crop_decimate camera_nodelet_manager"
-        name="my_decimator" machine="omni" >
+        name="my_decimator"  >
     <param name="x_offset" type="int" value="384" />
     <param name="y_offset" type="int" value="664" />
     <param name="width" type="int" value="1280" />
@@ -52,12 +52,12 @@
   </node>
 
     <!-- Debayering nodelet -->
-    <node pkg="nodelet" type="nodelet" name="image_proc_debayer" machine="omni" 
+    <node pkg="nodelet" type="nodelet" name="image_proc_debayer" 
           args="load image_proc/debayer camera_nodelet_manager">
     </node>
 
         <!-- Debayering nodelet -->
-    <node pkg="nodelet" type="nodelet" name="image_proc_rectify" machine="omni" 
+    <node pkg="nodelet" type="nodelet" name="image_proc_rectify" 
           args="load image_proc/rectify camera_nodelet_manager">
           <remap from="image_mono" to="/camera/image_mono"/>
           <remap from="image_info" to="/camera/camera_info"/>
